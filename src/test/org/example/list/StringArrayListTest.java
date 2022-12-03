@@ -1,6 +1,7 @@
 package org.example.list;
 
-import org.example.exception.MissingStringException;
+
+import org.example.exception.MissingElementException;
 import org.example.exception.NullArgumentException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StringArrayListTest {
 
-    StringList strings;
+    StringArrayList strings;
 
     @BeforeEach
     void setUp() {
@@ -26,7 +27,7 @@ class StringArrayListTest {
 
     @Test
     void shouldBeEmptyList() {
-        StringList stringList = new StringArrayList();
+        StringArrayList stringList = new StringArrayList();
         assertTrue(stringList.isEmpty());
     }
 
@@ -38,19 +39,19 @@ class StringArrayListTest {
 
     @Test
     void addToStringListTest() {
-        String s = strings.addS("hello");
+        String s = strings.addE("hello");
         assertEquals("hello", s);
         assertEquals(4, strings.size());
     }
 
     @Test
     void addToStringListShouldTrowsException() {
-        assertThrows(IndexOutOfBoundsException.class, () -> strings.addS(10, "test"));
+        assertThrows(IndexOutOfBoundsException.class, () -> strings.addE(10, "test"));
     }
 
     @Test
     void addNullToStringListShouldTrowsException() {
-        assertThrows(NullArgumentException.class, () -> strings.addS(null));
+        assertThrows(NullArgumentException.class, () -> strings.addE(null));
     }
 
     @Test
@@ -73,14 +74,14 @@ class StringArrayListTest {
 
     @Test
     void removeTest() {
-        String s = strings.removeS("TEST123");
+        String s = strings.removeE("TEST123");
         assertEquals("TEST123", s);
         assertEquals(2, strings.size());
     }
 
     @Test
     void removeNonExistStringShouldThrowsException() {
-        assertThrows(MissingStringException.class, () -> strings.removeS("str"));
+        assertThrows(MissingElementException.class, () -> strings.removeE("str"));
     }
 
     @Test
